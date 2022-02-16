@@ -1,2 +1,2 @@
-# SE-project 2022
+# Attendance Management System
 TEAM-Telugu Titans
