@@ -11,6 +11,7 @@ Ravikanth(334), Tharun(308), Bhargav(324),
 Agenda : updation in Class diagram if any along with design process
 # Time Alocated : 1hr
 Platform : Hostel
+
 Discussion :
 Layout features and design part we discussed with all group members.
 We can work on our class diagram to add more scope into it.
