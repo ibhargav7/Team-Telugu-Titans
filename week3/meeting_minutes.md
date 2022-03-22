@@ -8,6 +8,7 @@ Type of Meeting : As phase-1 Layout features and design
 # Attendees:
 Ravikanth(334), Tharun(308), Bhargav(324), 
  Ram Chandra Sekhar(18238) 
+ 
 Agenda : updation in Class diagram if any along with design process
 # Time Alocated : 1hr
 Platform : Hostel
@@ -29,6 +30,7 @@ Type of Meeting : As phase-2 discussion on work splitting
 
 # Attendees: 
 Ravikanth(334), Tharun(308), Bhargav(324), Ram Chandra Sekhar(18238)
+
 Agenda : Work Splitting and working on class diagram modifying's 
 # Time Alocated:1hr 
 Platform : Hostel 
