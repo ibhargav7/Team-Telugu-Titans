@@ -17,9 +17,12 @@ Layout features and design part we discussed with all group members.
 We can work on our class diagram to add more scope into it.
 status: Meeting is successful
 
-2nd meeting:
+
+# 2nd meeting:
 Date : Thursday, 19th march,2022 
+
 Time : 5:30 to 6:30 PM 
+
 Location : Hostel
 
 Type of Meeting : As phase-2 discussion on work splitting 
