@@ -28,6 +28,7 @@ Ravikanth(334), Tharun(308), Bhargav(324), Ram Chandra Sekhar(18238)
 Agenda : Work Splitting and working on class diagram modifying's 
 # Time Alocated:1hr 
 Platform : Hostel 
+
 Discussion : Layout features and work splitting . Working on modfying class diagram.
 
 status: Meeting is successful
