@@ -16,7 +16,8 @@ Layout features and design part we discussed with all group members.
 We can work on our class diagram to add more scope into it.
 status: Meeting is successful
 
-2nd meeting:
+# 2nd meeting:
+
 Date : Thursday, 19th march,2022 
 Time : 5:30 to 6:30 PM 
 Location : Hostel
@@ -44,7 +45,7 @@ Ravikanth(334), Tharun(308), Bhargav(324), Ram Chandra Sekhar(18238)
 Agenda : Creating Issues and assigning members to work
 # Time Allocated : 1hr
 Platform : Offline
-Discussion :
+Discussion : work status checking 
 
 Identified various tasks to be done
 Creating new issues on Repo.
