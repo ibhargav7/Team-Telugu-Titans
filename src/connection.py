@@ -5,7 +5,7 @@ def connect():
     try:
         
         conn = psycopg2.connect(
-                database="Attendance", user='postgres', password='tharunarelakumar', host='localhost', port= '5432')
+                database="att", user='postgres', password='bhargav1', host='localhost', port= '5432')
 		
         return conn
         
