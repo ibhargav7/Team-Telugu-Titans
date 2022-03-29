@@ -15,43 +15,44 @@ bg = ImageTk.PhotoImage(bg)
 bg1 = ImageTk.PhotoImage(bg1)
 bg2 = ImageTk.PhotoImage(bg2)
 def new():
-    name = user_entry.get()
-    password = password_entry.get()
-    conn = connect()
-    cur = conn.cursor()
-    query ='SELECT name,password from public."studentData" where name=\''+name+'\';'
-    cur.execute(query)
-
-    # display the PostgreSQL database server version
-    data = cur.fetchone()
-    if data == None:
-        messagebox.showinfo("Login System", "Please enter the Username and Password")
-    elif data[0]==name and data[1]==password:
-        print('Logged in Successfully')
-    else:
-        print('Incorrect username or password')
-
-    
-# close the communication with the PostgreSQL
-    cur.close()
     if user_entry.get()=="":
         messagebox.showinfo("Login System", "Please enter the Username")
     elif password_entry.get()=="":
         messagebox.showinfo("Login System", "Please enter the Password")
     elif user_entry.get()=="" and password_entry.get()=="":
         messagebox.showinfo("Login System", "Please enter the Username and Password")
-    elif user_entry.get()=="admin" and password_entry.get()=="admin123":
-        root.withdraw()
-        paswd.set("")
-        new_window = Toplevel(root)
-        def home_page():
-            new_window.withdraw()
-            root.deiconify()
-                
-            home = Button(new_window, text="Go to Login page", font=("Ariel 22 bold"), relief=GROOVE, bd=2, command=home_page)
-            home.pack(padx=30, pady=30)
     else:
-        messagebox.showinfo("Login System", "Please enter the correct Username and Password")
+        name = user_entry.get()
+        password = password_entry.get()
+        conn = connect()
+        cur = conn.cursor()
+        query ='SELECT roll,password from public."studentData" where roll=\''+name+'\';'
+        print(query)
+        cur.execute(query)
+        data = cur.fetchone()
+        print(data)
+        if data==None:
+            messagebox.showinfo("Login System", 'Incorrect username or password')
+        elif data[0]==name and data[1]==password:
+            
+            messagebox.showinfo("Login System", 'Logged in Successfully')
+            root.withdraw()
+            paswd.set("")
+            new_window = Toplevel(root)
+            def home_page():
+                new_window.withdraw()
+                root.deiconify()
+                    
+                home = Button(new_window, text="Go to Login page", font=("Ariel 22 bold"), relief=GROOVE, bd=2, command=home_page)
+                home.pack(padx=30, pady=30)
+        else:
+            messagebox.showinfo('Incorrect username or password')
+
+        
+        # close the communication with the PostgreSQL
+        cur.close()
+        
+
         
         
 canvas = Canvas(root, width=1200, height=700, bg='#FFFFFF',bd=0, highlightthickness=0)
