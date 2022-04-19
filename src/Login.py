@@ -14,7 +14,7 @@ class Login(tk.Tk):
         
         tk.Tk.__init__(self, *args, **kwargs)
         container = tk.Frame(self)
-
+        container.title ="Attendance Management System"
         container.pack(side="top", fill="both", expand = True)
 
         container.grid_rowconfigure(0, weight=1)
@@ -56,11 +56,19 @@ class login(tk.Frame):
                 
         canvas = Canvas(self, width=1200, height=700, bg='#FFFFFF',bd=0, highlightthickness=0)
         canvas.pack(fill=BOTH, expand=True)
-        canvas.create_rectangle(0, 0, 600, 700, fill='#503284', outline='white')
-        canvas.create_image(770, 30, image=bg, anchor='nw')
-        canvas.create_image(700, 250, image=bg1, anchor='nw')
-        canvas.create_image(0, 0, image=bg2, anchor='nw')
-
+        canvas.create_rectangle(1, 1, 600, 700, fill='#503284', outline='white')
+        img1 = Label(self,image=bg,bg='white')
+        img2 = Label(self,image=bg1,bg='white')
+        img3 = Label(self,image=bg2,bg='#503284')
+        canvas.create_window(770, 30, anchor='nw',window=img1)
+        canvas.create_window(700, 250, anchor='nw',window=img2)
+        canvas.create_window(0, 0, anchor='nw',window=img3)
+        img1.image = bg
+        img1.place()
+        img2.image = bg1
+        img2.place()
+        img3.image = bg2
+        img3.place()
         user_label = Label(self, text="Username ", font=("Ariel 20 bold"),bg='#503284', fg='white')
         canvas.create_window(80, 250, anchor="nw", window=user_label)
         user_entry = Entry(self, font=("Ariel 18 bold"))
