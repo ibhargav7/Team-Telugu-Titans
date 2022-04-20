@@ -5,8 +5,10 @@ from tkinter import messagebox
 from PIL import ImageTk, Image
 from connection import connect
 import time
+from typing import TYPE_CHECKING
+import teacher 
 
-class login(tk.Frame):
+class meeting(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -61,7 +63,7 @@ class login(tk.Frame):
         canvas.create_window(200, 590, anchor="nw", window=new_meeting)
 
         att = Button(self, text="Dashboard", font=("Ariel 22 bold"),
-                    width=10, bg="white", fg='#FFC331', relief=FLAT)
+                    width=10, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(teacher.teacher))
         canvas.create_window(800, 590, anchor="nw", window=att)
         now = Button(self, text="now", font=("Ariel 16 bold"),
                     width=3, bg="white", fg='#FFC331', relief=FLAT,command=get_time)

@@ -4,6 +4,8 @@ import tkinter as tk
 from tkinter import messagebox
 from PIL import ImageTk, Image
 from connection import connect
+from attendance import Tatt
+from meeting import meeting
 import time
 import pyqrcode
 
@@ -75,9 +77,9 @@ class teacher(tk.Frame):
             cur.close()
         get_meeting()
         new_meeting = Button(self, text="Create New Meeting", font=("Ariel 22 bold"),
-                             width=20, bg="white", fg='#FFC331', relief=FLAT)
+                             width=20, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(meeting))
         canvas.create_window(100, 550, anchor="nw", window=new_meeting)
 
         att = Button(self, text="Attendance Summary", font=("Ariel 22 bold"),
-                     width=20, bg="white", fg='#FFC331', relief=FLAT)
+                     width=20, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(Tatt))
         canvas.create_window(640, 550, anchor="nw", window=att)

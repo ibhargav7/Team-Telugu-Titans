@@ -5,6 +5,8 @@ from tkinter import messagebox
 from PIL import ImageTk, Image
 from connection import connect
 from teacher import teacher
+from attendance import Tatt
+from meeting import meeting
 LARGE_FONT= ("Verdana", 12)
 
 
@@ -22,7 +24,7 @@ class Login(tk.Tk):
 
         self.frames = {}
 
-        for F in (login, teacher,PageTwo):
+        for F in (login,Tatt,meeting, teacher,PageTwo):
 
             frame = F(container, self)
 
