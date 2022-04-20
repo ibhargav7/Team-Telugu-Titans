@@ -5,8 +5,8 @@ from tkinter import messagebox
 from PIL import ImageTk, Image
 from connection import connect
 import time
-from typing import TYPE_CHECKING
 import teacher 
+import configparser
 
 class meeting(tk.Frame):
 
@@ -21,7 +21,7 @@ class meeting(tk.Frame):
 
         def getTime():
             t = time.localtime()
-            current_time = int(time.strftime("%H"+"%M"+"%S", t))
+            current_time = int(time.strftime("%H"+"%M", t))
             return current_time
 
 
@@ -35,11 +35,41 @@ class meeting(tk.Frame):
         course_entry.focus()
         canvas.create_window(440, 200, anchor="nw", window=course_entry)
         def get_time():
-            self.start_entry = getTime()
-
+            start_entry.insert(0,getTime())
+        config_obj = configparser.ConfigParser()
+        config_obj.read("configfile.ini")
+        info = config_obj["info"]
+        teacher_name = info["teacher_name"]  
+        def new():
+            if course_entry.get()=="":
+                messagebox.showinfo("Meeting System", "Please enter the Course name")
+            elif start_entry.get()=="":
+                messagebox.showinfo("Meeting System", "Please enter the Start Time")
+            elif dur_entry.get()=="":
+                messagebox.showinfo("Meeting System", "Please enter the Duration of the meeting")
+            elif sec_entry.get()=="":
+                messagebox.showinfo("Meeting System", "Please enter the Section")
+            else:
+                course = course_entry.get()
+                start = start_entry.get()
+                dur = dur_entry.get()
+                sec = sec_entry.get()
+                conn = connect()
+                cur = conn.cursor()
+                query ='INSERT INTO public.meeting(start, duration, organiser, course, sec) VALUES ('+start+','+dur+',\''+teacher_name+'\',\''+course+'\',\''+sec+'\');'
+                print(query)
+                try:
+                    cur.execute(query)
+                    messagebox.showinfo("Meeting System", "Meeting Sheduled")
+                except:
+                    messagebox.showinfo("Meeting System", "Error creating Meeting")
+                
+                # close the communication with the PostgreSQL
+                cur.close()
         start_label = Label(self, text="Start Time ", font=(
             "Ariel 20 bold"), bg='white', fg='black')
         canvas.create_window(160, 300, anchor="nw", window=start_label)
+        
         start_entry = Entry(self, font=("Ariel 18 bold"))
         start_entry.focus()
         canvas.create_window(440, 300, anchor="nw", window=start_entry)
@@ -56,10 +86,9 @@ class meeting(tk.Frame):
         sec_entry.focus()
 
         canvas.create_window(440, 500, anchor="nw", window=sec_entry)
-        password_label = Label(self, text="Password ", font=(
-            "Ariel 20 bold"), bg='#503284', fg='black')
+        
         new_meeting = Button(self, text="Create Meet", font=("Ariel 22 bold"),
-                            width=12, bg="white", fg='#FFC331', relief=FLAT)
+                            width=12, bg="white", fg='#FFC331', relief=FLAT, command=new)
         canvas.create_window(200, 590, anchor="nw", window=new_meeting)
 
         att = Button(self, text="Dashboard", font=("Ariel 22 bold"),

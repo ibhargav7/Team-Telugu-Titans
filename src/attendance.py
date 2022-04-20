@@ -29,7 +29,7 @@ class Tatt(tk.Frame):
         canvas.create_window(800, 120, anchor="nw", window=drop)
         canvas.create_rectangle(50, 180, 1150, 500, fill='white', outline='black')
 
-
+        
 
         att = Button(self, text="Attendance Summary", font=("Ariel 22 bold"),
                 width=20, bg="white", fg='#FFC331', relief=FLAT)

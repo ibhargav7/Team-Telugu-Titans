@@ -8,6 +8,7 @@ from attendance import Tatt
 from meeting import meeting
 import time
 import pyqrcode
+import configparser
 
 
 class teacher(tk.Frame):
@@ -21,7 +22,7 @@ class teacher(tk.Frame):
         canvas.pack(fill=BOTH, expand=True)
 
         def generate_QR(str):
-            qr = pyqrcode.create("http://localhost/meeting" + str)
+            qr = pyqrcode.create("http://localhost/meeting/" + str)
             img = BitmapImage(data=qr.xbm(scale=7))
 
             img_lbl = Label(self, image=img, bg='white')
@@ -36,7 +37,12 @@ class teacher(tk.Frame):
         canvas.create_rectangle(
             0, 0, 1200, 80, fill='#FFC331', outline='white')
         def get_meeting():
-            user_label = Label(self, text="Username ", font=(
+            config_obj = configparser.ConfigParser()
+            config_obj.read("configfile.ini")
+            info = config_obj["info"]
+            teacher_name = info["teacher_name"]
+            print(teacher_name)
+            user_label = Label(self, text=teacher_name, font=(
                 "Ariel 20 bold"), bg='#503284', fg='Black')
             canvas.create_window(1000, 25, anchor="nw", window=user_label)
             meeting_label = Label(self, text="Ongoing Meeting", font=(
