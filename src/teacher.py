@@ -53,7 +53,7 @@ class teacher(tk.Frame):
 
             conn = connect()
             cur = conn.cursor()
-            query = 'SELECT * from public."meeting";'
+            query = 'SELECT * from public."meeting" where start<'+str(getTime())+' and start+duration>'+str(getTime())+';'
             print(query)
             cur.execute(query)
             data = cur.fetchone()
@@ -70,17 +70,31 @@ class teacher(tk.Frame):
                 metno2_label = Label(self, text=(data[4]+" - " + data[5]).title(), font=(
                     "Ariel 20 bold"), bg='white', fg='#FFC331')
                 canvas.create_window(430, 300, anchor="nw", window=metno2_label)
-
+                def take_att():
+                    q1='UPDATE public.meetingatt SET tick=tick+1, tickarr=array_append(tickarr,'+str(getTime())+') WHERE id=\''+str(data[0])+'\';'
+                    cur.execute(q1)
+                    conn.commit()
                 new_meeting = Button(self, text="Take Attendance", font=("Ariel 22 bold"),
-                                    width=15, bg="white", fg='#FFC331', relief=FLAT)
+                                    width=15, bg="white", fg='#FFC331', relief=FLAT, command=take_att)
                 canvas.create_window(440, 380, anchor="nw", window=new_meeting)
-
+                def end():
+                    q1='SELECT roll FROM public."studentData" where branch = \''+data[5]+'\';'
+                    cur.execute(q1)
+                    data1 = cur.fetchall()
+                    for i in data1:
+                        q2='SELECT att, tick FROM public."meetingatt" where id =\''+str(data[0])+'\'and stuid = \''+i[0]+'\';'
+                        cur.execute(q2)
+                        data2 = cur.fetchone()
+                        if data2[1] >0 and data2[0]==data2[1]:
+                            q3='UPDATE public.attend SET attendance=attendance+1 WHERE roll=\''+i[0]+'\'and course=\''+str(data[4])+'\';'
+                            cur.execute(q3)
+                            conn.commit()
                 att = Button(self, text="End Session", font=("Ariel 22 bold"),
-                            width=10, bg="white", fg='#FFC331', relief=FLAT)
+                            width=10, bg="white", fg='#FFC331', relief=FLAT, command=end)
                 canvas.create_window(830, 380, anchor="nw", window=att)
 
             # close the communication with the PostgreSQL
-            cur.close()
+            
         get_meeting()
         new_meeting = Button(self, text="Create New Meeting", font=("Ariel 22 bold"),
                              width=20, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(meeting))

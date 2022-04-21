@@ -25,9 +25,9 @@ class Main(tk.Tk):
 
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
-        
+
         self.frames = {}
-        
+
         for F in (login, Tatt, student, meeting, teacher):
 
             frame = F(container, self)
@@ -146,7 +146,7 @@ class login(tk.Frame):
                         config_obj.read("configfile.ini")
                         info = config_obj["info"]
                         info["teacher_name"] = name
-                        t=info["teacher_name"]
+                        t = info["teacher_name"]
                         with open('configfile.ini', 'w') as configfile:
                             config_obj.write(configfile)
                         messagebox.showinfo(
@@ -161,22 +161,6 @@ class login(tk.Frame):
         login = Button(self, text="Log In", font=("Ariel 22 bold"),
                        width=8, bg="white", fg='#FFC331', relief=FLAT, command=new)
         canvas.create_window(180, 500, anchor="nw", window=login)
-
-
-class PageOne(tk.Frame):
-
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Page One!!!", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
-
-        button1 = tk.Button(self, text="Back to Home",
-                            command=lambda: controller.show_frame(StartPage))
-        button1.pack()
-
-        button2 = tk.Button(self, text="Page Two",
-                            command=lambda: controller.show_frame(PageTwo))
-        button2.pack()
 
 
 app = Main()

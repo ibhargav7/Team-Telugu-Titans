@@ -58,11 +58,21 @@ class meeting(tk.Frame):
                 cur = conn.cursor()
                 query ='INSERT INTO public.meeting(start, duration, organiser, course, sec) VALUES ('+start+','+dur+',\''+teacher_name+'\',\''+course+'\',\''+sec+'\');'
                 print(query)
-                try:
-                    cur.execute(query)
-                    messagebox.showinfo("Meeting System", "Meeting Sheduled")
-                except:
-                    messagebox.showinfo("Meeting System", "Error creating Meeting")
+                cur.execute(query)
+                conn.commit()
+                messagebox.showinfo("Meeting System", "Meeting Sheduled")
+                q1='SELECT roll FROM public."studentData" where branch = \''+sec+'\''
+                cur.execute(q1)
+                data1 = cur.fetchall()
+                q2='SELECT max(id) FROM public."meeting" ;'
+                cur.execute(q2)
+                data2 = cur.fetchone()
+                print(data2[0])
+                for i in data1:
+                    print(i)
+                    q3='INSERT INTO public.meetingatt(id, stuid, att, tick, tickarr) VALUES ('+str(data2[0])+',\''+i[0]+'\',\''+str(0)+'\',\''+str(0)+'\',\'{}\');'
+                    cur.execute(q3)
+                    conn.commit()
                 
                 # close the communication with the PostgreSQL
                 cur.close()
