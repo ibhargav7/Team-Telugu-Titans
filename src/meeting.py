@@ -16,7 +16,20 @@ class meeting(tk.Frame):
         canvas = Canvas(self, width=1200, height=700,
                 bg='#FFFFFF', bd=0, highlightthickness=0)
         canvas.pack(fill=BOTH, expand=True)
-        canvas.create_rectangle(0, 0, 1200, 80, fill='#FFC331', outline='white')
+        config_obj = configparser.ConfigParser()
+        config_obj.read("configfile.ini")
+        info = config_obj["info"]
+        teacher_name = info["teacher_name"]
+        canvas.create_rectangle(
+                0, 0, 1200, 80, fill='#FFC331', outline='white')
+        conn = connect()
+        cur = conn.cursor()
+        query5 = 'SELECT  name FROM public."teacherData" where roll =\''+str(teacher_name)+'\' ;'
+        cur.execute(query5)
+        nama = cur.fetchone()
+        user_label = Label(self, text="Welcome, "+ str(nama[0]), font=(
+            "Ariel 20 bold"),bg='#FFC331', fg='White')
+        canvas.create_window(50, 25, anchor="nw", window=user_label)
 
 
         def getTime():

@@ -139,8 +139,7 @@ class login(tk.Frame):
                     data = cur.fetchone()
                     print(data)
                     if data == None:
-                        messagebox.showinfo(
-                            "Login System", 'Incorrect username or password')
+                        messagebox.showinfo("Login System", 'Incorrect username or password')
                     elif data[0] == name and data[1] == password:
                         config_obj = configparser.ConfigParser()
                         config_obj.read("configfile.ini")
