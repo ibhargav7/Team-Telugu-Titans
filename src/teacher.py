@@ -9,6 +9,7 @@ from meeting import meeting
 import time
 import pyqrcode
 import configparser
+import login
 
 
 
@@ -35,7 +36,10 @@ class teacher(tk.Frame):
         user_label = Label(self, text="Welcome, "+ str(nama[0]), font=(
             "Ariel 20 bold"),bg='#FFC331', fg='White')
         canvas.create_window(50, 25, anchor="nw", window=user_label)
-        
+        logout = Button(self, text="Log In", font=("Ariel 22 bold"),
+                       width=6, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(login.login))
+        canvas.create_window(950, 15, anchor="nw", window=logout)
+
         def generate_QR(str):
             qr = pyqrcode.create("http://localhost/meeting/" + str)
             img = BitmapImage(data=qr.xbm(scale=7))

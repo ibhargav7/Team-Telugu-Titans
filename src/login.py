@@ -1,48 +1,12 @@
-from re import T
 import tkinter as tk
 from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
 from PIL import ImageTk, Image
 from connection import connect
-from teacher import teacher
-from attendance import Tatt
-from meeting import meeting
-from student import student
+import teacher
+import student
 import configparser
-
-LARGE_FONT = ("Verdana", 12)
-
-
-class Main(tk.Tk):
-
-    def __init__(self, *args, **kwargs):
-
-        tk.Tk.__init__(self, *args, **kwargs)
-        container = tk.Frame(self)
-        container.title = "Attendance Management System"
-        container.pack(side="top", fill="both", expand=True)
-
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
-
-        self.frames = {}
-
-        for F in (login, Tatt, student, meeting, teacher):
-
-            frame = F(container, self)
-
-            self.frames[F] = frame
-
-            frame.grid(row=0, column=0, sticky="nsew")
-
-        self.show_frame(login)
-
-    def show_frame(self, cont):
-
-        frame = self.frames[cont]
-        frame.tkraise()
-
 
 class login(tk.Frame):
 
@@ -123,7 +87,7 @@ class login(tk.Frame):
                             config_obj.write(configfile)
                         messagebox.showinfo(
                             "Login System", 'Logged in Successfully')
-                        controller.show_frame(student)
+                        controller.show_frame(student.student)
                     else:
                         messagebox.showinfo('Incorrect username or password')
 
@@ -150,7 +114,7 @@ class login(tk.Frame):
                             config_obj.write(configfile)
                         messagebox.showinfo(
                             "Login System", 'Logged in Successfully')
-                        controller.show_frame(teacher)
+                        controller.show_frame(teacher.teacher)
                     else:
                         messagebox.showinfo('Incorrect username or password')
 
@@ -160,7 +124,3 @@ class login(tk.Frame):
         login = Button(self, text="Log In", font=("Ariel 22 bold"),
                        width=8, bg="white", fg='#FFC331', relief=FLAT, command=new)
         canvas.create_window(180, 500, anchor="nw", window=login)
-
-
-app = Main()
-app.mainloop()

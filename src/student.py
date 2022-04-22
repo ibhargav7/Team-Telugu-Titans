@@ -7,6 +7,8 @@ from connection import connect
 import time
 import pyqrcode
 import configparser
+from stuatt import stuatt
+import login
 
 class student(tk.Frame):
 
@@ -32,7 +34,10 @@ class student(tk.Frame):
         user_label = Label(self, text="Welcome, "+ str(nama[0]), font=(
             "Ariel 20 bold"),bg='#FFC331', fg='White')
         canvas.create_window(50, 25, anchor="nw", window=user_label)
-        
+        logout = Button(self, text="Log In", font=("Ariel 22 bold"),
+                       width=6, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(login.login))
+        canvas.create_window(950, 15, anchor="nw", window=logout)
+
         def generate_QR(str):
             qr = pyqrcode.create("http://localhost/meeting/" + str)
             img = BitmapImage(data=qr.xbm(scale=7))
@@ -113,13 +118,10 @@ class student(tk.Frame):
             # close the communication with the PostgreSQL
 
         get_meeting()
-        new_meeting = Button(self, text="Create New Meeting", font=("Ariel 22 bold"),
-                             width=20, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(meeting))
-        canvas.create_window(100, 550, anchor="nw", window=new_meeting)
 
         att = Button(self, text="Attendance Summary", font=("Ariel 22 bold"),
-                     width=20, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(Tatt))
-        canvas.create_window(640, 550, anchor="nw", window=att)
+                     width=20, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(stuatt))
+        canvas.create_window(350, 550, anchor="nw", window=att)
 
         def refresh():
             get_meeting()
