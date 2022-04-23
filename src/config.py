@@ -7,3 +7,4 @@ config.set('info', 'student_name', 'qwerty')
 
 with open(r"configfile.ini", 'w') as configfile:
     config.write(configfile)
+    
