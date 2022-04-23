@@ -121,3 +121,6 @@ class Tatt(tk.Frame):
         dash = Button(self, text="Dashboard", font=("Ariel 22 bold"),
                       width=10, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(teacher.teacher))
         canvas.create_window(500, 590, anchor="nw", window=dash)
+
+        
+       
