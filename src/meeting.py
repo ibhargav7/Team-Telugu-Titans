@@ -31,7 +31,7 @@ class meeting(tk.Frame):
         user_label = Label(self, text="Welcome, "+ str(nama[0]), font=(
             "Ariel 20 bold"),bg='#FFC331', fg='White')
         canvas.create_window(50, 25, anchor="nw", window=user_label)
-        logout = Button(self, text="Log In", font=("Ariel 22 bold"),
+        logout = Button(self, text="Log Out", font=("Ariel 22 bold"),
                        width=6, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(login.login))
         canvas.create_window(950, 15, anchor="nw", window=logout)
 

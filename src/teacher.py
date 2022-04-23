@@ -36,7 +36,7 @@ class teacher(tk.Frame):
         user_label = Label(self, text="Welcome, "+ str(nama[0]), font=(
             "Ariel 20 bold"),bg='#FFC331', fg='White')
         canvas.create_window(50, 25, anchor="nw", window=user_label)
-        logout = Button(self, text="Log In", font=("Ariel 22 bold"),
+        logout = Button(self, text="Log Out", font=("Ariel 22 bold"),
                        width=6, bg="white", fg='#FFC331', relief=FLAT, command=lambda: controller.show_frame(login.login))
         canvas.create_window(950, 15, anchor="nw", window=logout)
 
@@ -94,6 +94,8 @@ class teacher(tk.Frame):
                         getTime())+') WHERE id=\''+str(data[0])+'\';'
                     cur.execute(q1)
                     conn.commit()
+                    messagebox.showinfo(
+                    "Attendance System", "Attendance recording has started")
                 new_meeting = Button(self, text="Take Attendance", font=("Ariel 22 bold"),
                                      width=15, bg="white", fg='#FFC331', relief=FLAT, command=take_att)
                 canvas.create_window(440, 380, anchor="nw", window=new_meeting)
@@ -113,6 +115,8 @@ class teacher(tk.Frame):
                                 i[0]+'\'and course=\''+str(data[4])+'\';'
                             cur.execute(q3)
                             conn.commit()
+                    messagebox.showinfo(
+                    "Attendance System", "Attendance has been recorded")
                 att = Button(self, text="End Session", font=("Ariel 22 bold"),
                              width=10, bg="white", fg='#FFC331', relief=FLAT, command=end)
                 canvas.create_window(830, 380, anchor="nw", window=att)
